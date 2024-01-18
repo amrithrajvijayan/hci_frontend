@@ -1,7 +1,6 @@
-import Image from 'next/image'
 import HomePage from './pages/home'
 
-export default function Home() {
+export default function Page() {
   return (
     <HomePage/>
   )
