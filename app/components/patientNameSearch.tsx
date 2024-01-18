@@ -8,20 +8,33 @@ export default function PatientNameSearchComponent() {
     const [searchText, setSearchText] = useState('');
     const router = useRouter()
 
+    const [searchType, setSearchType] = useState('name');
+ 
+    const searchTypeOptions = [
+        {text: "Patient Name", value: 'name'},
+        {text: "Patient Id", value: 'id'},
+        {text: "Date of Visit", value: 'date'}
+    ];
+
+    const searchTypeChangeHandler = (event: any) => {
+        setSearchType(event.target.value);
+    };    
+
     function handleSearch() {
-        console.log("inside with state as " + searchText);
-        const url = '/search?searchType=name&searchValue=' + searchText;
+        const url = '/search?searchType=' + searchType + '&searchValue=' + searchText;
         router.push(url);
     }
+
+    const selectTypes = searchTypeOptions.map((type) => {
+        return <option key={type.value} value={type.value}>{type.text}</option>
+    })
 
 
     return (
         <div className="grid-container">
             <div className="grid-item">
-                <select>
-                    <option>Patient Name</option>
-                    <option>Patient ID</option>
-                    <option>Date of Visit</option>
+                <select onChange={searchTypeChangeHandler} >
+                    {selectTypes}
                 </select>
             </div>
             <div className="grid-item">

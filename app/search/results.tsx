@@ -29,7 +29,7 @@ export default function SearchResults() {
 
         console.log('value read inside useeffect is ' + searchValue);
     
-        fetch('https://api.example.com/data?searchType=' + searchValue)
+        fetch('https://api.example.com/data?searchType=' + searchType+'&searchValue=' + searchValue)
         .then(response => response.json())
         .then(json => setData(json))
         .catch(error => console.error(error));
