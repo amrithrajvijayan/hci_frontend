@@ -10,7 +10,8 @@ export default function PatientNameSearchComponent() {
 
     function handleSearch() {
         console.log("inside with state as " + searchText);
-        router.push('/search')
+        const url = '/search?searchType=name&searchValue=' + searchText;
+        router.push(url);
     }
 
 
