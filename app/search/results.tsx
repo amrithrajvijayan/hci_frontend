@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'
 
 interface PatientVisit {
-    id: string,
+    patient_id: string,
     name: string,
     date: string,
 }
@@ -21,13 +21,10 @@ export default function SearchResults() {
         const params = new URLSearchParams(search);
         const searchType = params.get('searchType');
         const searchValue = params.get('searchValue');
-
-        console.log('value read inside useeffect is ' + searchValue);
     
-        fetch('http://localhost:5103/patientVisits?searchType=' + searchType+'&searchValue=' + searchValue)
+        fetch('http://localhost:5177/patientVisits?searchType=' + searchType+'&searchValue=' + searchValue)
         .then(response => response.json())
         .then(json => {
-            console.log("obtained " + JSON.stringify(json));
             setData(json)
         })
         .catch(error => console.error(error));
@@ -40,8 +37,8 @@ export default function SearchResults() {
 
     const tableData = data.map((obj: PatientVisit) => {
         return (
-                <tr key={obj.id}>
-                    <td>{obj.id}</td>
+                <tr key={obj.patient_id + obj.date + obj.name}>
+                    <td>{obj.patient_id}</td>
                     <td>{obj.name}</td>
                     <td>{obj.date}</td>
                 </tr>
