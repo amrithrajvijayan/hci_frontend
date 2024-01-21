@@ -13,7 +13,6 @@ export default function PatientNameSearchComponent() {
     const searchTypeOptions = [
         {text: "Patient Name", value: 'name'},
         {text: "Patient Id", value: 'id'},
-        {text: "Date of Visit", value: 'date'}
     ];
 
     const searchTypeChangeHandler = (event: any) => {
