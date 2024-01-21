@@ -20,8 +20,12 @@ export default function PatientNameSearchComponent() {
     };    
 
     function handleSearch() {
-        const url = '/search?searchType=' + searchType + '&searchValue=' + searchText;
-        router.push(url);
+        if (searchText.length <= 0) {
+            alert("Please provide valid search input");
+        } else {
+            const url = '/search?searchType=' + searchType + '&searchValue=' + searchText;
+            router.push(url);
+        }
     }
 
     const selectTypes = searchTypeOptions.map((type) => {
