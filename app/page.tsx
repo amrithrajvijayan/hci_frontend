@@ -1,12 +1,14 @@
 'use client'
 
-import HomePage from './pages/home'
+import { Fragment } from 'react'
+import HomePage from './home/home'
 import { BrowserRouter } from 'react-router-dom'
 
 export default function Page() {
-  return (
-    <BrowserRouter>
+
+  const comp = (typeof window !== 'undefined') ? (<BrowserRouter>
     <HomePage/>
-    </BrowserRouter>
-  )
+    </BrowserRouter>) : <Fragment/>
+
+  return comp;
 }
