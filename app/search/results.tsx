@@ -22,7 +22,7 @@ export default function SearchResults() {
         const searchType = params.get('searchType');
         const searchValue = params.get('searchValue');
     
-        fetch('http://localhost:5177/patientVisits?searchType=' + searchType+'&searchValue=' + searchValue)
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/patientVisits?searchType=' + searchType+'&searchValue=' + searchValue)
         .then(response => response.json())
         .then(json => {
             setData(json)
@@ -35,7 +35,7 @@ export default function SearchResults() {
     }
 
 
-    const tableData = data.map((obj: PatientVisit) => {
+    const tableData = data.length > 0 ? data.map((obj: PatientVisit) => {
         return (
                 <tr key={obj.patient_id + obj.date + obj.name}>
                     <td>{obj.patient_id}</td>
@@ -43,14 +43,12 @@ export default function SearchResults() {
                     <td>{obj.date}</td>
                 </tr>
         );
-    })
+    }) : 'No Records Found';
 
     return (
-        <div className="searchResults">
-            <div>
-                <h1>
+        <div className="searchResults HomePageContents">
+            <div className="searchResultsHeading">
                     Patient Search Results 
-                </h1>
             </div>
             <div>
                 <table>
