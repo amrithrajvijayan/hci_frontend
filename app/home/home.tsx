@@ -1,3 +1,5 @@
+'use client'
+
 import PatientNameSearchComponent from '../components/patientNameSearch'
 
 export default function HomePage() {
