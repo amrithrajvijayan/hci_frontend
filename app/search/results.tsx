@@ -2,23 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'
 
+interface PatientVisit {
+    id: string,
+    name: string,
+    date: string,
+}
+
 export default function SearchResults() {
 
     const router = useRouter()
 
 
-    const [data, setData] = useState([
-        {
-            id: 1,
-            name: "Test 1",
-            date: "11/22/33"
-        },
-        {
-            id: 2,
-            name: "Test 2",
-            date: "1/122/33"
-        }
-    ]);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         const search = window.location.search;
@@ -29,9 +24,12 @@ export default function SearchResults() {
 
         console.log('value read inside useeffect is ' + searchValue);
     
-        fetch('https://api.example.com/data?searchType=' + searchType+'&searchValue=' + searchValue)
+        fetch('http://localhost:5103/patientVisits?searchType=' + searchType+'&searchValue=' + searchValue)
         .then(response => response.json())
-        .then(json => setData(json))
+        .then(json => {
+            console.log("obtained " + JSON.stringify(json));
+            setData(json)
+        })
         .catch(error => console.error(error));
     }, []);
 
@@ -40,7 +38,7 @@ export default function SearchResults() {
     }
 
 
-    const tableData = data.map((obj) => {
+    const tableData = data.map((obj: PatientVisit) => {
         return (
                 <tr key={obj.id}>
                     <td>{obj.id}</td>
